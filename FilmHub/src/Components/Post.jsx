@@ -28,7 +28,6 @@ export const Post = () => {
                     {data.map((curElem) => {
                         const { id, title, body } = curElem;
                         return (
-
                             <li key={id} className="card">
 
                                 <p className='card-title'>{title}</p>
