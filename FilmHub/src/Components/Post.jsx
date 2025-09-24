@@ -8,7 +8,7 @@ import { UpdatecardPopup } from './UpdatecardPopup';
 
 export const Post = () => {
 
-    const [data, setDate] = useState([]);
+    const [data, setData] = useState([]);
     const [deletedata, setDeletedata] = useState([]);
 
     //Finctionality for get the data
@@ -16,7 +16,7 @@ export const Post = () => {
     const getPostData = async () => {
         const res = await getPost();
         console.log(res.data)
-        setDate(res.data)
+        setData(res.data)
     }
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Post = () => {
                     return curPost.id != id;
 
                 });
-                setDate(newUpdatePosts);
+                setData(newUpdatePosts);
             }else{
                 console.log("Failed to delect the card:", res.status )
             }
@@ -41,17 +41,20 @@ export const Post = () => {
             console.log(error);
         }
     };
-
+    
     return (
         <>
 
-            <UpdatecardPopup/>
+            <UpdatecardPopup 
+            data={data}
+            setData={setData}
+            />
             <section className='main-card'>
                 <ul>
                     {data.map((curElem) => {
                         const { id, title, body } = curElem;
                         return (
-                            <li key={id} className="card">
+                           <li key={`${id}-${Math.random()}`} className="card">
 
                                 <p className='card-title'>{title}</p>
                                 <p className='card-body'>{body}</p>
